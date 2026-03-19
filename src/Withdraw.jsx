@@ -31,7 +31,7 @@ export default function Withdraw({ onClose }) {
 
     try {
       const res = await fetch(
-        "http://bestcryptotrading.rf.gd/backend/api/withdraw.php", // Ensure filename matches your PHP
+        "https://bestcryptotrading.rf.gd/backend/api/withdraw.php", // Ensure filename matches your PHP
         {
           method: "POST",
           credentials: "include",
