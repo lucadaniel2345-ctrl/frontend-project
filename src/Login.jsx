@@ -14,7 +14,7 @@ export default function Login({ goRegister, setUser }) {
     setMsg("Verifying security protocol...");
 
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/login.php", {
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/login.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
