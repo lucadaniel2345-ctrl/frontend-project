@@ -18,7 +18,7 @@ export default function Register({ goLogin }) {
     setMessage("Processing registration...");
 
     try {
-      const res = await fetch("http://localhost/backend/api/register.php", {
+      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/register.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
