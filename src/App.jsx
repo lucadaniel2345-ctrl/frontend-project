@@ -15,7 +15,7 @@ export default function App() {
     const checkSession = async () => {
       try {
         const res = await fetch(
-          "http://localhost/backend/api/checkSession.php",
+          "http://bestcryptotrading.rf.gd/backend/api/checkSession.php",
           { credentials: "include" }
         );
         const data = await res.json();
@@ -32,7 +32,7 @@ export default function App() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost/backend/api/logout.php", {
+      await fetch("http://bestcryptotrading.rf.gd/backend/api/logout.php", {
         credentials: "include",
       });
       setUser(null);
