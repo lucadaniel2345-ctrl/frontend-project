@@ -16,7 +16,7 @@ export default function ProfitChart() {
   const loadProfit = async () => {
     try {
       const res = await fetch(
-        "http://bestcryptotrading.rf.gd/backend/api/get_user_trades.php",
+        "https://bestcryptotrading.rf.gd/backend/api/get_user_trades.php",
         { credentials: "include" }
       );
 
