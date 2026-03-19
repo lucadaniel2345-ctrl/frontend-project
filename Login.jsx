@@ -7,7 +7,7 @@ export default function Login({ onLogin }) {
 
   async function login() {
     const res = await fetch(
-      "http://localhost/crypto-exchange/api_login.php",
+      "http://bestcryptotrading.rf.gd/crypto-exchange/api_login.php",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
