@@ -4,7 +4,7 @@ export default function AdminSupport() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost/backend/api/adminUsers.php")
+    fetch("http://bestcryptotrading.rf.gd/backend/api/adminUsers.php")
       .then(r => r.json())
       .then(setUsers);
   }, []);
