@@ -79,10 +79,10 @@ export default function Dashboard({ user, onLogout }) {
   /* ================= DATA LOADING ================= */
   const loadData = useCallback(async () => {
     try {
-      const resW = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_wallets.php", { credentials: "include" });
+      const resW = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_wallets.php", { credentials: "include" });
       const dataW = await resW.json();
       
-      const resP = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_prices.php");
+      const resP = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_prices.php");
       const prices = await resP.json();
       setAllPrices(prices);
 
@@ -106,15 +106,15 @@ export default function Dashboard({ user, onLogout }) {
         setTotalUsd(total);
       }
 
-      const resT = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_user_trades.php", { credentials: "include" });
+      const resT = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_user_trades.php", { credentials: "include" });
       const dataT = await resT.json();
       if (dataT.success) setTrades(dataT.trades);
 
-      const resWith = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_withdrawals.php", { credentials: "include" });
+      const resWith = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_withdrawals.php", { credentials: "include" });
       const dataWith = await resWith.json();
       if (dataWith.success) setWithdrawals(dataWith.withdrawals);
 
-      const resUser = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_user_status.php", { credentials: "include" });
+      const resUser = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_user_status.php", { credentials: "include" });
       const dataUser = await resUser.json();
       if (dataUser.success) setKycStatus(dataUser.kyc_status);
 
@@ -131,7 +131,7 @@ export default function Dashboard({ user, onLogout }) {
     const timer = setInterval(() => setTick(t => t + 1), 1000);
     const sync = setInterval(async () => {
       try {
-        const response = await fetch("http://bestcryptotrading.rf.gd/backend/api/check_trades.php", { credentials: "include" });
+        const response = await fetch("https://bestcryptotrading.rf.gd/backend/api/check_trades.php", { credentials: "include" });
         const resJson = await response.json();
         if (resJson.status === "success" || resJson.settled > 0) loadData();
       } catch (e) {}
@@ -154,7 +154,7 @@ export default function Dashboard({ user, onLogout }) {
     formData.append("selfie", selfieFile);
     
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/submit_kyc.php", { 
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/submit_kyc.php", { 
         method: "POST", 
         credentials: "include", 
         body: formData 
@@ -176,7 +176,7 @@ export default function Dashboard({ user, onLogout }) {
   /* ================= CONVERT/TRADE/SUPPORT LOGIC ================= */
   const loadSwapHistory = async () => {
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_swap_history.php", { credentials: "include" });
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_swap_history.php", { credentials: "include" });
       const data = await res.json();
       if (data.success) setSwapHistory(data.history);
     } catch (e) { console.error("Swap history load error", e); }
@@ -189,7 +189,7 @@ export default function Dashboard({ user, onLogout }) {
     
     setIsConverting(true);
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/convert.php", { 
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/convert.php", { 
         method: "POST", 
         credentials: "include", 
         headers: { "Content-Type": "application/json" }, 
@@ -230,7 +230,7 @@ export default function Dashboard({ user, onLogout }) {
         payout: timeframeProfitMap[timeframe].profit / 100 
       };
 
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/trade.php", { 
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/trade.php", { 
         method: "POST", 
         credentials: "include", 
         headers: { "Content-Type": "application/json" }, 
@@ -261,7 +261,7 @@ export default function Dashboard({ user, onLogout }) {
 
   const fetchChatHistory = async () => {
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_support_messages.php", { credentials: "include" });
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/get_support_messages.php", { credentials: "include" });
       const data = await res.json();
       if (data.success) setSupportMessages(data.messages);
     } catch (err) { console.error("Fetch support error"); }
@@ -271,14 +271,14 @@ export default function Dashboard({ user, onLogout }) {
     if (!checkAccess("Customer Support")) return;
     if (!supportMessage.trim()) return;
     try {
-      const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/send_support_message.php", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: supportMessage }), });
+      const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/send_support_message.php", { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: supportMessage }), });
       const data = await res.json();
       if (data.success) { setSupportMessage(""); fetchChatHistory(); }
     } catch (err) { console.error("Send message error"); }
   };
 
   const logout = async () => {
-    await fetch("http://bestcryptotrading.rf.gd/backend/api/logout.php", { credentials: "include" });
+    await fetch("https://bestcryptotrading.rf.gd/backend/api/logout.php", { credentials: "include" });
     onLogout();
   };
 
