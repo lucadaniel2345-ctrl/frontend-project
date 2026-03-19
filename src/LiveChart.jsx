@@ -8,7 +8,7 @@ useEffect(()=>{
 
 const fetchPrice = () => {
 
-fetch("http://bestcryptotrading.rf.gd/backend/api/get_prices.php",{
+fetch("https://bestcryptotrading.rf.gd/backend/api/get_prices.php",{
 credentials:"include"
 })
 .then(res=>res.json())
