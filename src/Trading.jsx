@@ -17,7 +17,7 @@ setInterval(fetchPrice,3000)
 
 async function fetchPrice(){
 
-const res = await fetch(`http://bestcryptotrading.rf.gd/backend/price.php?coin=${asset}`)
+const res = await fetch(`https://bestcryptotrading.rf.gd/backend/price.php?coin=${asset}`)
 const data = await res.json()
 
 setPrice(data[asset].usd)
@@ -26,7 +26,7 @@ setPrice(data[asset].usd)
 
 async function placeTrade(direction){
 
-await fetch("http://bestcryptotrading.rf.gd/backend/trade.php",{
+await fetch("https://bestcryptotrading.rf.gd/backend/trade.php",{
 
 method:"POST",
 headers:{
