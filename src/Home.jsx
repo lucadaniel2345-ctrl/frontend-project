@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const res = await fetch("http://localhost/backend/api/get_prices.php");
+        const res = await fetch("http://bestcryptotrading.rf.gd/backend/api/get_prices.php");
         const data = await res.json();
         setPrices(data);
       } catch (err) {
