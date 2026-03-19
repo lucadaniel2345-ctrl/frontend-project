@@ -7,7 +7,7 @@ export default function LiveChat() {
 
   const loadMessages = async () => {
     const res = await fetch(
-      "http://localhost/backend/api/getMessages.php",
+      "http://bestcryptotrading.rf.gd/backend/api/getMessages.php",
       { credentials: "include" }
     );
     const data = await res.json();
@@ -26,7 +26,7 @@ export default function LiveChat() {
     if (!text) return;
 
     await fetch(
-      "http://localhost/backend/api/sendMessage.php",
+      "http://bestcryptotrading.rf.gd/backend/api/sendMessage.php",
       {
         method: "POST",
         credentials: "include",
