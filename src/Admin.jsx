@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API = "http://localhost/backend/api/";
+const API = "http://bestcryptotrading.rf.gd/backend/api/";
 
 export default function AdminPanel({ user, onLogout }) {
   const navigate = useNavigate();
