@@ -16,31 +16,40 @@ export default function Login({ goRegister, setUser }) {
     try {
       const res = await fetch("https://bestcryptotrading.rf.gd/backend/api/login.php", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      console.log("Backend response:", text);
+
+      const data = JSON.parse(text);
 
       if (data.success) {
         setMsg("✅ Success. Redirecting...");
         if (setUser) setUser(data.user || true);
+
         setTimeout(() => {
-          window.location.href = data.user?.role === "admin" ? "/admin" : "/dashboard";
+          window.location.href =
+            data.user?.role === "admin" ? "/admin" : "/dashboard";
         }, 1000);
+
       } else {
         setMsg("❌ " + (data.message || "Invalid credentials"));
       }
+
     } catch (err) {
+      console.error("Login error:", err);
       setMsg("❌ Network error. Check server status.");
     }
   };
 
   return (
     <div style={styles.container}>
-      <motion.div 
-        initial={{ opacity: 0, y: 15 }} 
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         style={styles.authCard}
@@ -62,7 +71,7 @@ export default function Login({ goRegister, setUser }) {
               required
               style={{
                 ...styles.input,
-                borderColor: focused === "user" ? "#F3BA2F" : "#474D57"
+                borderColor: focused === "user" ? "#F3BA2F" : "#474D57",
               }}
             />
           </div>
@@ -72,6 +81,7 @@ export default function Login({ goRegister, setUser }) {
               <label style={styles.label}>Password</label>
               <span style={styles.forgotText}>Forgot password?</span>
             </div>
+
             <input
               name="password"
               type="password"
@@ -82,15 +92,15 @@ export default function Login({ goRegister, setUser }) {
               required
               style={{
                 ...styles.input,
-                borderColor: focused === "pass" ? "#F3BA2F" : "#474D57"
+                borderColor: focused === "pass" ? "#F3BA2F" : "#474D57",
               }}
             />
           </div>
 
-          <motion.button 
+          <motion.button
             whileHover={{ backgroundColor: "#FCD535" }}
             whileTap={{ scale: 0.98 }}
-            type="submit" 
+            type="submit"
             style={styles.mainButton}
           >
             Log In
@@ -98,10 +108,12 @@ export default function Login({ goRegister, setUser }) {
         </form>
 
         {msg && (
-          <div style={{
-            ...styles.messageBox,
-            color: msg.includes("✅") ? "#02C076" : "#CF304A"
-          }}>
+          <div
+            style={{
+              ...styles.messageBox,
+              color: msg.includes("✅") ? "#02C076" : "#CF304A",
+            }}
+          >
             {msg}
           </div>
         )}
@@ -129,11 +141,11 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
-    backgroundColor: "#0B0E11", // Binance Dark Theme
+    backgroundColor: "#0B0E11",
     fontFamily: "'BinancePlex', -apple-system, sans-serif",
   },
   authCard: {
-    background: "#181A20", // Binance Card color
+    background: "#181A20",
     padding: "48px 40px",
     borderRadius: "16px",
     width: "420px",
@@ -182,7 +194,7 @@ const styles = {
     padding: "14px",
     borderRadius: "8px",
     border: "none",
-    background: "#F3BA2F", // Iconic Binance Yellow
+    background: "#F3BA2F",
     color: "#181A20",
     fontWeight: "600",
     fontSize: "16px",
